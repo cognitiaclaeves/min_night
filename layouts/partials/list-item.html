@@ -30,7 +30,7 @@
     {{ end }}
     {{ range .Params.tags }}
     <a href="{{"/tags/"|relLangURL }}{{.|urlize}}">
-        <kbd class="item-tag"> {{ . }} </kbd>
+        <kbd class="item-tag">{{ . }}</kbd> 
     </a>
     {{ end }}
 
