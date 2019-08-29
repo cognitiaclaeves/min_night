@@ -4,16 +4,21 @@
     <h2>{{ .Title }}</h2>
 
     {{ range (.Paginator 10).Pages }}
-        {{ if eq "Posts" $.Title }}
+        {{/* if eq "Blog" $.Title */}}
            {{partial "list-item-post.html" .}}
-        {{else}}
+        {{/*else}}
             {{ partial "list-item-project" . }}
-        {{end}}
+        {{end*/}}
+
+	<div class="post-content">
+		<p>{{ .Summary | plainify | safeHTML }} {{ if .Truncated }} … {{ end }}</p>
+	</div>
+
     {{end}}
+
     
 </main>
 
 {{ partial "paginator" . }}
-
 
 {{ partial "footer" . }}

@@ -7,7 +7,9 @@
     <br> <div class="text-justify">{{ .Content }}</div>
 
     <!-- related posts with the same tags -->
-    {{ $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
+    <!-- Note: There may be a faster, better way to do this without intersect
+         For now, I only care about posts related by series (thread) -->
+    {{/* $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
 
     {{ if $related }}
 
@@ -23,8 +25,9 @@
 
         {{ template "_internal/disqus.html" . }}
 
-    {{ end }}
+    {{ end */}}
 
+    {{ partial "after-post.html" . }}
 </main>
 
 {{ partial "footer.html" . }}
