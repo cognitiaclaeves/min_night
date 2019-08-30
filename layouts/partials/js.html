@@ -13,7 +13,7 @@
 
 <!-- custom -->
 {{ range .Site.Params.js }}
-<script src="{{ . | absURL }}"></script>
+<script src="{{ . | relURL }}"></script>
 {{ end }}
 
 <!-- jquery -->
