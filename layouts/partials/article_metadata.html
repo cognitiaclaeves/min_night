@@ -4,19 +4,20 @@
     {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") | $.Scratch.Set "pub_date" }}
     {{ with .Description }} {{ $.Scratch.Set "subtitle" . }} {{ end }}
     {{ with .ReadingTime }} {{ $.Scratch.Set "read_time" . }} {{ end }}
+    {{ with .Params.Get "author" }} {{ $.Scratch.Set "author" . }} {{ end }}
 
     {{/* $.Scratch.Set "read_time" "" */}}
-        {{/* $read_time := printf " <i %s=\"%s\"></i> %d" $data_type .Site.Params.svg_clock .ReadingTime */}}
-        {{/* $.Scratch.Add "read_time" $read_time */}}
+    {{/* $read_time := printf " <i %s=\"%s\"></i> %d" $data_type .Site.Params.svg_clock .ReadingTime */}}
+    {{/* $.Scratch.Add "read_time" $read_time */}}
 
-    {{ $.Scratch.Set "author" "" }}
-    {{ if .Params.author }}
-        {{ $auth := printf " <i %s=\"%s\"></i> %s" $data_type .Site.Params.svg_author .Params.author }}
-        {{ $.Scratch.Add "author" $auth }}
-    {{ end }}
+    {{/* $.Scratch.Set "author" "" */}}
+    {{/* if .Params.author */}}
+        {{/* $auth := printf " <i %s=\"%s\"></i> %s" $data_type .Site.Params.svg_author .Params.author */}}
+        {{/* $.Scratch.Add "author" $auth */}}
+    {{/* end */}}
 
     <h4><a href="{{ .Scratch.Get "link" }}">{{ .Title }}</a>  {{ if .Draft }}(Draft){{ end }}</h4>
-    <h5>{{ $.Scratch.Get "pub_date" }} {{ $.Scratch.Get "read_time" }} minutes{{ $.Scratch.Get "author" | safeHTML }}</h5>
+    <h5>{{ $.Scratch.Get "pub_date" }} - {{ $.Scratch.Get "read_time" }} minutes {{ if .Params.author }} - {{ $.Scratch.Get "author" }}{{ end }}</h5>
     <h5>{{ $.Scratch.Get "subtitle" }}</h5>
 
     {{ range.Params.categories }}
