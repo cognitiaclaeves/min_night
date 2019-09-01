@@ -4,11 +4,14 @@
     {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") | $.Scratch.Set "pub_date" }}
     {{ with .Description }} {{ $.Scratch.Set "subtitle" . }} {{ end }}
     {{ with .ReadingTime }} {{ $.Scratch.Set "read_time" . }} {{ end }}
-    {{ with .Params.Get "author" }} {{ $.Scratch.Set "author" . }} {{ end }}
+    {{ with .Params.author }} {{ $.Scratch.Set "author" . }} {{ end }}
 
+    {{/* For some reason, trying to add icons like this results in duplicate data */}}
     {{/* $.Scratch.Set "read_time" "" */}}
     {{/* $read_time := printf " <i %s=\"%s\"></i> %d" $data_type .Site.Params.svg_clock .ReadingTime */}}
     {{/* $.Scratch.Add "read_time" $read_time */}}
+    {{/* It might be because .Add was used */}}
+    {{/* If the above is changed to .Set in the future, may need to use | safeHTML */}}
 
     {{/* $.Scratch.Set "author" "" */}}
     {{/* if .Params.author */}}
